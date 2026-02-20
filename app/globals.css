@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --black: #0a0a0a;
+  --danger: #FF003C;
+  --card: #1a1a1a;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--black);
+  color: #e5e5e5;
+}
+
+/* Dark-tech background: subtle grid */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 0, 60, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 0, 60, 0.03) 1px, transparent 1px);
+  background-size: 24px 24px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Focus visible for a11y */
+*:focus-visible {
+  outline: 2px solid var(--danger);
+  outline-offset: 2px;
+}
