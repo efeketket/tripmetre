@@ -25,7 +25,6 @@ export function QuestionCard({
   total,
   onNext,
   onPrev,
-  canGoNext,
   canGoPrev,
 }: QuestionCardProps) {
   const isBoolean = question.type === "boolean";
@@ -54,7 +53,11 @@ export function QuestionCard({
         </header>
 
         {isBoolean ? (
-          <div className="flex gap-4 sm:gap-6 pt-2 pb-4" role="group" aria-label={`${question.text}, Evet veya Hayır seçin`}>
+          <div
+            className="flex gap-4 sm:gap-6 pt-2 pb-4"
+            role="group"
+            aria-label={`${question.text}, Evet veya Hayır seçin`}
+          >
             <motion.button
               type="button"
               onClick={() => onSelect(BOOLEAN_SCORE.yes)}
