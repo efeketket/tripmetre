@@ -29,7 +29,7 @@ export const QUESTIONS: Question[] = [
   { id: "q2", text: "Özür dilesem beni affeder misin?", weight: 0.14, type: "boolean", isReverse: true },
   { id: "q3", text: "Sarılmak isteseydim beni kaç gücünde iterdin?", weight: 0.18, type: "numeric" },
   { id: "q4", text: "Şu an yemek yapıyor olsaydın beni zehirleme ihtimalin ne kadar?", weight: 0.12, type: "numeric" },
-  { id: "q5", text: "Uçurumun kenarında olsam beni aşağıya iter miydin?", weight: 0.1, type: "boolean" },
+  { id: "q5", text: "Uçurumun kenarında olsam beni aşağıya iter miydin?", weight: 0.1, type: "boolean"},
 ];
 
 export interface ScoreState {
@@ -57,14 +57,14 @@ const initialState: ScoreState = {
 
 const ScoreContext = createContext<ScoreContextValue | null>(null);
 
-/** Ağırlıklı ortalama. isReverse sorularda (11 - puan) ile trip yönünde normalize edilir; answers değişmez. */
+/** Ağırlıklı ortalama. Eğer cevap seçilmemişse varsayılan puan kullanılır (DEFAULT_SCORE). 
+   isReverse sorularda (11 - puan) ile trip yönünde normalize edilir; answers değişmez. */
 function weightedTripScore(answers: Record<QuestionId, number | null>): number | null {
-  const entries = QUESTIONS.filter((q) => answers[q.id] != null);
-  if (entries.length === 0) return null;
+  const DEFAULT_SCORE = 5;
   let weightedSum = 0;
   let totalWeight = 0;
-  for (const q of entries) {
-    const raw = answers[q.id]!;
+  for (const q of QUESTIONS) {
+    const raw = answers[q.id] ?? DEFAULT_SCORE;
     const normalized = q.isReverse ? 11 - raw : raw; // 1–10 skalasında ters çevirme
     weightedSum += normalized * q.weight;
     totalWeight += q.weight;

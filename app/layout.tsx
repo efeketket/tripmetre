@@ -17,7 +17,7 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: "Tripmetre — Trip seviyeni ölç",
-  description: "Partnerinin trip seviyesini 1–10 arası puanla. Eğlenceli kriz yönetimi.",
+  description: "Partnerinin trip seviyesini öğren.",
 };
 
 export default function RootLayout({
